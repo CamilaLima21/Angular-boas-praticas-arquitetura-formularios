@@ -1,0 +1,66 @@
+<h4 class="text-center">Registre-se e mostre o seu gatinho!</h4>
+<form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
+  <div class="form-group">
+    <input
+      placeholder="Email"
+      class="form-control"
+      formControlName="email"
+    />
+    <app-mensagem
+      mensagem="Email obrigatório"
+      *ngIf="novoUsuarioForm.get('email')?.errors?.required && novoUsuarioForm.get('email')?.touched">
+    </app-mensagem>
+    <app-mensagem
+      mensagem="Email em formato inválido"
+      *ngIf="novoUsuarioForm.get('email')?.errors?.email && novoUsuarioForm.get('email')?.touched">
+    </app-mensagem>
+  </div>
+  <div class="form-group">
+    <input
+      placeholder="Nome completo"
+      class="form-control"
+      formControlName="fullName"
+    />
+    <app-mensagem
+      mensagem="Nome em formato inválido"
+      *ngIf="novoUsuarioForm.get('fullName')?.errors && novoUsuarioForm.get('fullName')?.touched">
+    </app-mensagem>
+  </div>
+  <div class="form-group">
+    <input
+      placeholder="Usuário"
+      class="form-control"
+      formControlName="userName"
+    />
+    <app-mensagem
+      mensagem="Usuário somente com letras minúsculas"
+      *ngIf="novoUsuarioForm.get('userName')?.errors?.minusculo && novoUsuarioForm.get('userName')?.touched">
+    </app-mensagem>
+    <app-mensagem
+      mensagem="Usuário já existe"
+      *ngIf="novoUsuarioForm.get('userName')?.errors?.usuarioExistente">
+    </app-mensagem>
+    <app-mensagem
+      mensagem="Usuário obrigatório"
+      *ngIf="novoUsuarioForm.get('userName')?.errors?.required && novoUsuarioForm.get('userName')?.touched">
+    </app-mensagem>
+  </div>
+  <div class="form-group">
+    <input
+      placeholder="Senha"
+      class="form-control"
+      type="password"
+      formControlName="password"
+    />
+    <app-mensagem
+      *ngIf="novoUsuarioForm.errors?.senhaIgualUsuario"
+      mensagem="Senha deve ser diferente do usuário"
+    >
+  </app-mensagem>
+  </div>
+  <button class="btn btn-primary btn-block">
+    Cadastrar
+  </button>
+</form>
+
+<p>Já é um usuário? <a [routerLink]="['']">Faça login</a></p>
